@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>葉律言 | 平面畫作作品輯 Yeh Lu-Yen Art Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Serif+TC:wght@400;600;900&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="rock-artist-theme">
+
+  <!-- 寫實動態舞台火焰畫布 (Realistic Stage Fire Canvas) -->
+  <canvas id="stageFireCanvas" class="stage-fire-canvas"></canvas>
+
+  <!-- YouTube 背景音樂播放器容器 (隱形置於背景) -->
+  <div id="youtubePlayer" class="youtube-audio-container"></div>
+
+  <!-- 浮動背景音樂與音量大小控制面板 -->
+  <div class="music-player-widget" id="musicPlayerWidget">
+    <div class="music-panel">
+      <button class="music-mute-btn" id="musicMuteBtn" aria-label="禁音切換" title="點擊靜音 / 解除靜音">
+        <span class="music-icon" id="musicIcon">🔇</span>
+      </button>
+      <div class="volume-control-group">
+        <input 
+          type="range" 
+          id="volumeSlider" 
+          class="volume-slider" 
+          min="0" 
+          max="100" 
+          value="70" 
+          aria-label="背景音樂音量大小控制" 
+          title="滑動調整音量大小"
+        />
+        <span class="volume-val" id="volumeVal">70%</span>
+      </div>
+      <div class="sound-wave paused" id="soundWave" title="音訊波形">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 舞台暗黑氛圍與聚光微光 -->
+  <div class="stage-vignette"></div>
+  <div class="stage-top-glow"></div>
+
+  <!-- 導航列 Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo">
+        <span class="artist-name">葉律言</span>
+        <span class="artist-en">YEH LU-YEN // PAINTER</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="#hero" class="nav-link">簡介 ABOUT</a>
+        <a href="#gallery" class="nav-link">畫作輯 GALLERY</a>
+        <a href="#contact" class="nav-link nav-contact-btn">聯絡 CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 自我介紹框架與頭像框 Hero Section -->
+    <section class="hero" id="hero">
+      <div class="container hero-container">
+        
+        <!-- 自我介紹框架 (無生成假文字，保留乾淨欄位與插槽) -->
+        <div class="intro-card">
+          <div class="intro-header">
+            <span class="intro-badge">PAINTER // 平面畫家</span>
+            <h1 class="artist-title">葉律言 <span class="artist-en-title">YEH LU-YEN</span></h1>
+          </div>
+
+          <!-- 自介內容區塊 -->
+          <div class="bio-placeholder-box">
+            <h2 class="box-label">簡介 // ABOUT</h2>
+            <div class="bio-content">
+              <p class="bio-text">普通大學生</p>
+            </div>
+          </div>
+
+          <!-- 基本資料框架 (無油畫、無壓克力、無 EMAIL) -->
+          <div class="profile-info-grid">
+            <div class="info-item">
+              <span class="info-label">姓名</span>
+              <span class="info-val">葉律言 (Yeh, Lu-Yen)</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">專業領域</span>
+              <span class="info-val">平面繪畫創作</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">創作媒材</span>
+              <span class="info-val">數位繪畫 / 平面創作</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#gallery" class="btn btn-flame">瀏覽畫作輯 ↓</a>
+            <a href="#contact" class="btn btn-outline">聯絡洽談</a>
+          </div>
+        </div>
+
+        <!-- 頭像相框 -->
+        <div class="portrait-wrapper">
+          <div class="portrait-frame">
+            <div class="portrait-img-box">
+              <img 
+                src="avatar.jpg" 
+                alt="葉律言 個人頭像" 
+                class="portrait-img"
+                id="avatarImg"
+              />
+            </div>
+            <div class="portrait-caption">
+              <span class="caption-name">葉律言</span>
+              <span class="caption-tag">個人頭像 // AVATAR</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 畫作展示主展廳 Gallery Showcase -->
+    <section class="section gallery" id="gallery">
+      <div class="container">
+        
+        <!-- 畫廊展廳標題 -->
+        <div class="gallery-header">
+          <span class="gallery-subtitle">SELECTED WORKS</span>
+          <h2 class="gallery-title">畫作作品輯</h2>
+          <div class="title-line"></div>
+        </div>
+
+        <!-- 畫作類別篩選 -->
+        <div class="filter-controls">
+          <button class="filter-btn active" data-filter="all">全部展示 (ALL)</button>
+          <button class="filter-btn" data-filter="cat-1">系列一 (SERIES I)</button>
+          <button class="filter-btn" data-filter="cat-2">系列二 (SERIES II)</button>
+          <button class="filter-btn" data-filter="cat-3">系列三 (SERIES III)</button>
+        </div>
+
+        <!-- 畫作展示框網格 (純淨畫框) -->
+        <div class="artworks-grid" id="artworksGrid">
+          
+          <!-- 展框 01 -->
+          <article class="art-card" data-category="cat-1">
+            <div class="art-frame">
+              <img 
+                src="https://placehold.co/800x600/121217/555562?text=PAINTING+FRAME+01" 
+                alt="畫作展示框 01"
+                loading="lazy"
+              />
+              <div class="art-overlay">
+                <button class="view-art-btn" data-id="1">檢視作品細節</button>
+              </div>
+              <span class="frame-tag">#01</span>
+            </div>
+            <div class="art-info">
+              <h3 class="art-title">作品 01</h3>
+              <p class="art-specs">媒材：—　|　尺寸：—　|　年份：—</p>
+            </div>
+          </article>
+
+          <!-- 展框 02 -->
+          <article class="art-card" data-category="cat-1">
+            <div class="art-frame">
+              <img 
+                src="https://placehold.co/800x600/121217/555562?text=PAINTING+FRAME+02" 
+                alt="畫作展示框 02"
+                loading="lazy"
+              />
+              <div class="art-overlay">
+                <button class="view-art-btn" data-id="2">檢視作品細節</button>
+              </div>
+              <span class="frame-tag">#02</span>
+            </div>
+            <div class="art-info">
+              <h3 class="art-title">作品 02</h3>
+              <p class="art-specs">媒材：—　|　尺寸：—　|　年份：—</p>
+            </div>
+          </article>
+
+          <!-- 展框 03 -->
+          <article class="art-card" data-category="cat-2">
+            <div class="art-frame">
+              <img 
+                src="https://placehold.co/800x600/121217/555562?text=PAINTING+FRAME+03" 
+                alt="畫作展示框 03"
+                loading="lazy"
+              />
+              <div class="art-overlay">
+                <button class="view-art-btn" data-id="3">檢視作品細節</button>
+              </div>
+              <span class="frame-tag">#03</span>
+            </div>
+            <div class="art-info">
+              <h3 class="art-title">作品 03</h3>
+              <p class="art-specs">媒材：—　|　尺寸：—　|　年份：—</p>
+            </div>
+          </article>
+
+          <!-- 展框 04 -->
+          <article class="art-card" data-category="cat-2">
+            <div class="art-frame">
+              <img 
+                src="https://placehold.co/800x600/121217/555562?text=PAINTING+FRAME+04" 
+                alt="畫作展示框 04"
+                loading="lazy"
+              />
+              <div class="art-overlay">
+                <button class="view-art-btn" data-id="4">檢視作品細節</button>
+              </div>
+              <span class="frame-tag">#04</span>
+            </div>
+            <div class="art-info">
+              <h3 class="art-title">作品 04</h3>
+              <p class="art-specs">媒材：—　|　尺寸：—　|　年份：—</p>
+            </div>
+          </article>
+
+          <!-- 展框 05 -->
+          <article class="art-card" data-category="cat-3">
+            <div class="art-frame">
+              <img 
+                src="https://placehold.co/800x600/121217/555562?text=PAINTING+FRAME+05" 
+                alt="畫作展示框 05"
+                loading="lazy"
+              />
+              <div class="art-overlay">
+                <button class="view-art-btn" data-id="5">檢視作品細節</button>
+              </div>
+              <span class="frame-tag">#05</span>
+            </div>
+            <div class="art-info">
+              <h3 class="art-title">作品 05</h3>
+              <p class="art-specs">媒材：—　|　尺寸：—　|　年份：—</p>
+            </div>
+          </article>
+
+          <!-- 展框 06 -->
+          <article class="art-card" data-category="cat-3">
+            <div class="art-frame">
+              <img 
+                src="https://placehold.co/800x600/121217/555562?text=PAINTING+FRAME+06" 
+                alt="畫作展示框 06"
+                loading="lazy"
+              />
+              <div class="art-overlay">
+                <button class="view-art-btn" data-id="6">檢視作品細節</button>
+              </div>
+              <span class="frame-tag">#06</span>
+            </div>
+            <div class="art-info">
+              <h3 class="art-title">作品 06</h3>
+              <p class="art-specs">媒材：—　|　尺寸：—　|　年份：—</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 聯絡通道 Contact Section (無 EMAIL) -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div class="contact-header">
+            <span class="gallery-subtitle">CONTACT & INQUIRIES</span>
+            <h2 class="contact-title">聯絡 葉律言</h2>
+          </div>
+
+          <div class="contact-methods">
+            <a href="https://www.instagram.com/landplains._.95/" target="_blank" rel="noopener noreferrer" class="contact-card">
+              <span class="icon">📷</span>
+              <div class="text">
+                <span class="label">INSTAGRAM</span>
+                <span class="val">@landplains._.95</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- 聯繫表單框架 (無 EMAIL 欄位) -->
+          <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('訊息已送出！');">
+            <div class="form-group">
+              <label for="name">稱呼 / 姓名</label>
+              <input type="text" id="name" placeholder="請輸入稱呼" required>
+            </div>
+            <div class="form-group">
+              <label for="contactInfo">聯絡方式 (IG / Line / 電話等自訂)</label>
+              <input type="text" id="contactInfo" placeholder="請填寫您習慣的聯絡帳號或方式" required>
+            </div>
+            <div class="form-group">
+              <label for="message">訊息內容</label>
+              <textarea id="message" rows="3" placeholder="請輸入您的訊息..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-flame btn-block">送出訊息</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 畫作詳細資訊彈窗 Modal -->
+  <div class="modal" id="artModal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-dialog">
+      <button class="modal-close" id="modalClose" aria-label="關閉視窗">&times;</button>
+      <div class="modal-body" id="modalBody">
+        <!-- 動態由 JavaScript 填入作品彈窗內容 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 頁尾 Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="copyright">
+        © 2026 <strong>葉律言 (Yeh, Lu-Yen)</strong>. 版權所有 // ALL RIGHTS RESERVED.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
